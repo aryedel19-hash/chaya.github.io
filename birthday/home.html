@@ -59,7 +59,12 @@
             font-weight: 400;
             margin: 0;
             letter-spacing: 2px;
-            animation: dance 2s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        .letter {
+            display: inline-block;
+            animation: letterWave 1.2s ease-in-out infinite;
         }
         
         .poem {
@@ -75,18 +80,12 @@
             text-align: center;
         }
         
-        @keyframes dance {
+        @keyframes letterWave {
             0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-20px) rotate(-2deg);
+                transform: translateY(0);
             }
             50% {
-                transform: translateY(0) rotate(0deg);
-            }
-            75% {
-                transform: translateY(-20px) rotate(2deg);
+                transform: translateY(-15px);
             }
         }
     </style>
@@ -111,5 +110,21 @@
            As we celebrate in every way! ❤️
        </div>
    </div>
+   
+   <script>
+       document.addEventListener('DOMContentLoaded', function() {
+           const h1 = document.querySelector('.birthday-container h1');
+           const text = h1.textContent;
+           h1.textContent = '';
+           
+           text.split('').forEach((char, index) => {
+               const span = document.createElement('span');
+               span.className = 'letter';
+               span.textContent = char;
+               span.style.animationDelay = (index * 0.1) + 's';
+               h1.appendChild(span);
+           });
+       });
+   </script>
 </body>
 </html>
