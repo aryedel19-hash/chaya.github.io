@@ -51,6 +51,16 @@
             font-weight: bold;
             pointer-events: none;
             z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(var(--rotation));
+            }
+            50% {
+                transform: translateY(-20px) rotate(var(--rotation));
+            }
         }
         
         @keyframes gradientShift {
@@ -88,10 +98,10 @@
         .poem {
             font-family: 'Poppins', sans-serif;
             font-size: 0.95em;
-            color: white;
+            color: #1a1a1a;
             margin-top: 15px;
             line-height: 1.6;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
             width: 100%;
             max-width: 600px;
             font-weight: 300;
@@ -188,6 +198,7 @@
                const numberDiv = document.createElement('div');
                numberDiv.className = 'number-bg';
                numberDiv.textContent = '21';
+               const rotation = Math.random() * 360;
                numberDiv.style.left = Math.random() * 100 + '%';
                numberDiv.style.top = Math.random() * 100 + '%';
                numberDiv.style.fontSize = (Math.random() * 80 + 20) + 'px';
@@ -195,7 +206,9 @@
                numberDiv.style.opacity = Math.random() * 0.25 + 0.03;
                numberDiv.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
                numberDiv.style.fontWeight = Math.random() > 0.5 ? 'bold' : 'normal';
-               numberDiv.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+               numberDiv.style.setProperty('--rotation', 'rotate(' + rotation + 'deg)');
+               const delay = Math.random() * 3;
+               numberDiv.style.animationDelay = delay + 's';
                document.body.appendChild(numberDiv);
            }
            
