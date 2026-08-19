@@ -36,22 +36,21 @@
         }
         
         body::after {
-            content: '21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21';
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            font-size: 5rem;
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0.08);
-            overflow: hidden;
-            word-wrap: break-word;
-            line-height: 1.2;
             z-index: 0;
             pointer-events: none;
-            white-space: pre-wrap;
-            font-family: Arial, sans-serif;
+        }
+        
+        .number-bg {
+            position: fixed;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 0;
         }
         
         @keyframes gradientShift {
@@ -181,6 +180,25 @@
    
    <script>
        document.addEventListener('DOMContentLoaded', function() {
+           // Create random "21" background numbers
+           const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B9D', '#FFB703', '#8ECAE6', '#FB5607', '#FFBE0B', '#FB5607'];
+           const fonts = ['Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Comic Sans MS'];
+           
+           for (let i = 0; i < 100; i++) {
+               const numberDiv = document.createElement('div');
+               numberDiv.className = 'number-bg';
+               numberDiv.textContent = '21';
+               numberDiv.style.left = Math.random() * 100 + '%';
+               numberDiv.style.top = Math.random() * 100 + '%';
+               numberDiv.style.fontSize = (Math.random() * 80 + 20) + 'px';
+               numberDiv.style.color = colors[Math.floor(Math.random() * colors.length)];
+               numberDiv.style.opacity = Math.random() * 0.4 + 0.05;
+               numberDiv.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+               numberDiv.style.fontWeight = Math.random() > 0.5 ? 'bold' : 'normal';
+               numberDiv.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+               document.body.appendChild(numberDiv);
+           }
+           
            const h1 = document.querySelector('.birthday-container h1');
            const text = h1.textContent;
            h1.textContent = '';
