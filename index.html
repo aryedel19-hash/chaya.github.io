@@ -88,9 +88,28 @@
                 transform: translateY(-15px);
             }
         }
+        
+        .popper {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2em;
+            z-index: 0;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .popper-item {
+            animation: fall linear forwards;
+        }
     </style>
 </head>
 <body>
+   <div class="popper" id="popper-container"></div>
    <div class="birthday-container">
        <h1>Happy Birthday chaya!</h1>
        <div class="poem">
@@ -124,6 +143,25 @@
                span.style.animationDelay = (index * 0.1) + 's';
                h1.appendChild(span);
            });
+           
+           // Create party poppers
+           const popperEmojis = ['🎉', '🎊', '🎈', '✨', '🎁', '🎀', '🎂', '🌟'];
+           const popperContainer = document.getElementById('popper-container');
+           
+           function createPopper() {
+               const popper = document.createElement('div');
+               popper.className = 'popper-item';
+               popper.textContent = popperEmojis[Math.floor(Math.random() * popperEmojis.length)];
+               popper.style.left = Math.random() * 100 + '%';
+               popper.style.top = '-50px';
+               popper.style.animationDuration = (Math.random() * 2 + 2) + 's';
+               popperContainer.appendChild(popper);
+               
+               setTimeout(() => popper.remove(), (Math.random() * 2 + 2) * 1000);
+           }
+           
+           // Create poppers continuously
+           setInterval(createPopper, 300);
        });
    </script>
 </body>
